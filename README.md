@@ -1,4 +1,4 @@
 Juan Sebastian Restrepo Nieto
 Sebastian Rivera Mira
-Mariana Posada 
+Mariana Alvarez Posada 
 Víctor Andrés Vélez
