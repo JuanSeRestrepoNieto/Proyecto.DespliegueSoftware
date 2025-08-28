@@ -15,4 +15,9 @@ public class HomeController
     string mensaje = "Hola mundo Dos";
     return mensaje;
   }
+
+  public string GoodbyeWorld()
+  {
+    return "¡Adiós, mundo!";
+  }
 }
