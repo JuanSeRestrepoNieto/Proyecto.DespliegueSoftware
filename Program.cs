@@ -55,8 +55,6 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
-app.MapGet("/home/hello", () => "Hello World desde la nueva funcionalidad");
-
 app.MapGet("helloWorld", () => {
     HomeController homeController= new HomeController();
     return homeController.HelloWorld();
