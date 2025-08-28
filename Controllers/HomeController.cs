@@ -9,4 +9,9 @@ public class HomeController
     mensaje = edad > 15 ? "Eres un pre adoslescente" : "Eres un niño";
     return mensaje;  
   }
+
+  public string GoodbyeWorld()
+  {
+    return "¡Adiós, mundo!";
+  }
 }
