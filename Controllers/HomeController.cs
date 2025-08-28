@@ -7,6 +7,12 @@ public class HomeController
     const int edad = 12;
     string mensaje = string.Empty;
     mensaje = edad > 15 ? "Eres un pre adoslescente" : "Eres un niño";
-    return mensaje;  
+    return mensaje;
+  }
+
+  public string SaludoDos()
+  {
+    string mensaje = "Hola mundo Dos";
+    return mensaje;
   }
 }
