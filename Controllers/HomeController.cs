@@ -2,5 +2,5 @@ namespace Controllers;
 
 public class HomeController
 {
-  public string HelloWorld() => "Hello World desde la nueva funcionalidad";
+  public string HelloWorld() => "Nuevo mensaje desde la corrección";
 }
