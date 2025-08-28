@@ -19,7 +19,8 @@ app.UseHttpsRedirection();
 
 var summaries = new[]
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching", "PruebaConglicto", 
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching", "Texto para resolver"
 };
 
 var forecasts = new List<WeatherForecast>();
@@ -79,6 +80,11 @@ app.MapPut("/weatherforecast/{date}", (string date, WeatherForecast updated) =>
 app.MapGet("helloWorld", () => {
     HomeController homeController= new HomeController();
     return homeController.HelloWorld();
+});
+
+app.MapGet("goodbyeWorld", () => {
+    HomeController homeController= new HomeController();
+    return homeController.GoodbyeWorld();
 });
 
 app.Run();
