@@ -8,7 +8,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -21,17 +20,35 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
+var forecasts = new List<WeatherForecast>();
+
+app.MapPost("/weatherforecast", (WeatherForecast input) =>
+{
+     forecasts.Add(input);
+     return Results.Created($"/weatherforecast/{input.Date:yyyy-MM-dd}", input);
+});
+
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+     if (forecasts.Count > 0)
+          return Results.Ok(forecasts);
+
+     var summaries = new[]
+     {
+        "Freezing","Bracing","Chilly","Cool","Mild","Warm",
+        "Balmy","Hot","Sweltering","Scorching"
+    };
+
+     var forecast = Enumerable.Range(1, 5).Select(index =>
+         new WeatherForecast
+         (
+             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+             Random.Shared.Next(-20, 55),
+             summaries[Random.Shared.Next(summaries.Length)]
+         ))
+         .ToArray();
+
+     return Results.Ok(forecast);
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
