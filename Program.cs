@@ -55,6 +55,27 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 
+app.MapPut("/weatherforecast/{date}", (string date, WeatherForecast updated) =>
+{
+    if (!DateOnly.TryParse(date, out var parsedDate))
+    {
+        return Results.BadRequest("Formato de fecha inválido. Usa yyyy-MM-dd.");
+    }
+
+    var existing = forecasts.FirstOrDefault(f => f.Date == parsedDate);
+    if (existing is null)
+    {
+        return Results.NotFound($"No se encontró el pronóstico con fecha {date}.");
+    }
+
+    // Como usaste `record`, debes reemplazarlo en la lista (son inmutables)
+    forecasts.Remove(existing);
+    forecasts.Add(updated);
+
+    return Results.Ok(updated);
+});
+
+
 app.MapGet("helloWorld", () => {
     HomeController homeController= new HomeController();
     return homeController.HelloWorld();
