@@ -76,6 +76,24 @@ app.MapPut("/weatherforecast/{date}", (string date, WeatherForecast updated) =>
     return Results.Ok(updated);
 });
 
+app.MapDelete("/weatherforecast/{date}", (string date) =>
+{
+    if (!DateOnly.TryParse(date, out var parsedDate))
+    {
+        return Results.BadRequest("Formato de fecha inválido. Usa yyyy-MM-dd.");
+    }
+ 
+    var existing = forecasts.FirstOrDefault(f => f.Date == parsedDate);
+    if (existing is null)
+    {
+        return Results.NotFound($"No se encontró el pronóstico con fecha {date}.");
+    }
+ 
+    forecasts.Remove(existing);
+ 
+    return Results.Ok($"Pronóstico con fecha {date} eliminado correctamente.");
+});
+
 
 app.MapGet("helloWorld", () => {
     HomeController homeController= new HomeController();
